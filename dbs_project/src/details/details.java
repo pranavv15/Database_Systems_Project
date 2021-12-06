@@ -51,7 +51,7 @@ public class details implements ActionListener {
             String t = text.getText();
 
 
-            NumberFormat nf = NumberFormat.getCurrencyInstance();
+            // NumberFormat nf = NumberFormat.getCurrencyInstance();
 		    Connection connection = null;
 		    String query = null;
 
@@ -67,7 +67,7 @@ public class details implements ActionListener {
 			    Statement stmnt = connection.createStatement();
             
 			    int a_id = Integer.parseInt(t);
-                query = "select * from involvements, accidents where accidents.aid = "+a_id+" and involvements.aid = "+a_id+"";
+                query = "select involvements.aid,vin,damages,driver_ssn,accident_date,city,state from involvements, accidents where accidents.aid = "+a_id+" and involvements.aid = "+a_id+"";
                 ResultSet rslt = stmnt.executeQuery(query);
                 int val = 0;
                 while (rslt.next()) {
@@ -106,7 +106,7 @@ public class details implements ActionListener {
                     try {
                         connection.close();
                     } catch (Exception e) {
-                    }
+                }
         }
     
 

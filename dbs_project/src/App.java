@@ -1,4 +1,3 @@
-
 import java.sql.*;
 import java.text.NumberFormat;
 import java.util.Scanner;
@@ -93,33 +92,31 @@ public class App {
 
 
 			// 2. Execute query
-			// System.out.println("Enter the accident id number: ");
-			// int a_id = m1.nextInt();
-			// query = "select * from involvements, accidents where accidents.aid = "+a_id+" and involvements.aid = "+a_id+"";
-			// ResultSet rslt = stmnt.executeQuery(query);
-			// while (rslt.next()) {
-			// 	int accid = rslt.getInt(1);
-			// 	String v = rslt.getString(2);
-			// 	int da = rslt.getInt(3);
-			// 	String Driver_vin = rslt.getString(4);
-			// 	String date = rslt.getString(5);
-			// 	String city = rslt.getString(6);
-			// 	String State = rslt.getString(7);
-				
+			System.out.println("Enter the accident id number: ");
+			int a_id = m1.nextInt();
+			query = "select * from involvements, accidents where accidents.aid = "+a_id+" and involvements.aid = "+a_id+"";
+			ResultSet rslt = stmnt.executeQuery(query);
+			while (rslt.next()) {
+				int accid = rslt.getInt(1);
+				String v = rslt.getString(2);
+				int da = rslt.getInt(3);
+				String Driver_vin = rslt.getString(4);
+				String date = rslt.getString(5);
+				String city = rslt.getString(6);
+				String State = rslt.getString(7);
+
+				System.out.println("Acc id: " + accid);
+				System.out.println("Vin: " + v);
+				System.out.println("Damages: " + da);
+				System.out.println("Driver SSN: " + Driver_vin);
+				System.out.println("Date: " + date);
+				System.out.println("City: " + city);
+				System.out.println("State: " + State);
 
 
-			// 	System.out.println("Acc id: " + accid);
-			// 	System.out.println("Vin: " + v);
-			// 	System.out.println("Damages: " + da);
-			// 	System.out.println("Driver SSN: " + Driver_vin);
-			// 	System.out.println("Date: " + date);
-			// 	System.out.println("City: " + city);
-			// 	System.out.println("State: " + State);
-
-
-			// 	System.out.println();
-			// }
-				// rslt.close()
+				System.out.println();
+			}
+				rslt.close();
 			// 3. Execute search for ranges
 			
 			// 3b. Range of average damages
@@ -160,26 +157,26 @@ public class App {
 
 			// 3a. Range of dates
 
-			String x = "2004-01-01";
-			String y = "2009-01-01";
-			// PreparedStatement psmt = connection.prepareStatement("SELECT * FROM accidents WHERE accident_date < '"+?+"' AND accident_date > '"+?+"'");
-			// psmt.setString(1, x);
-			// psmt.setString(2, y);
-			query = "SELECT * FROM accidents WHERE accident_date < '"+y+"' AND accident_date > '"+x+"' ";
-			ResultSet rset = stmnt.executeQuery(query);
-			while (rset.next()){
-				int ac_id = rset.getInt(1);
-				String date = rset.getString(2);
-				String city = rset.getString(3);
-				String state = rset.getString(4);
-				// int dam2 = result.getInt(3);
-				System.out.println("Accident id is: " + ac_id);
-				System.out.println("Date is :  " + date);
-				System.out.println("City is : " + city);
-				System.out.println("State is : " + state);
+			// String x = "2004-01-01";
+			// String y = "2009-01-01";
+			// // PreparedStatement psmt = connection.prepareStatement("SELECT * FROM accidents WHERE accident_date < '"+?+"' AND accident_date > '"+?+"'");
+			// // psmt.setString(1, x);
+			// // psmt.setString(2, y);
+			// query = "SELECT * FROM accidents WHERE accident_date < '"+y+"' AND accident_date > '"+x+"' ";
+			// ResultSet rset = stmnt.executeQuery(query);
+			// while (rset.next()){
+			// 	int ac_id = rset.getInt(1);
+			// 	String date = rset.getString(2);
+			// 	String city = rset.getString(3);
+			// 	String state = rset.getString(4);
+			// 	// int dam2 = result.getInt(3);
+			// 	System.out.println("Accident id is: " + ac_id);
+			// 	System.out.println("Date is :  " + date);
+			// 	System.out.println("City is : " + city);
+			// 	System.out.println("State is : " + state);
 
-				System.out.println("");
-			}
+			// 	System.out.println("");
+			// }
 
 
 

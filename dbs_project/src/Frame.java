@@ -3,17 +3,24 @@ import javax.swing.*; // for GUI components
 import java.awt.event.*; // for action events
 import details.details;
 import insert.insert;
+import java.sql.*;
+import java.text.NumberFormat;
+import java.util.Scanner;
+import java.util.*;
+
+import javax.print.PrintService;
+
+import java.time.*;
 
 
 public class Frame {
-    
-    // private static JTextField field;
+
+    private static JTextField field;
     private static JLabel lab;
     private static JButton button1;
     private static JButton button2;
     private static JButton button3;
 
-    
     Frame() {
     
                 JFrame frame = new JFrame();
@@ -22,9 +29,7 @@ public class Frame {
                 frame.setLocation(new Point(550, 200));
                 frame.setSize(new Dimension(600, 400));
                 frame.setTitle("A frame");
-
-                // field.setBackground(Color.YELLOW);
-                // frame.add(field);
+    
                 button1 = new JButton();
                 button1.setBackground(Color.RED);
                 button1.setText("Add Accident");
@@ -64,10 +69,8 @@ public class Frame {
                 }
                 
                 else if (event.getSource()== button1){
-                insert ins = new insert();
+                        insert ins = new insert();
                 }
-
-                
                     }
             }
 
@@ -75,10 +78,7 @@ public class Frame {
             
             public static void main (String[] args){
                 Frame fr = new Frame();
-                // fr;
-            }
-                
-            
-                    
+                  
+}
 }
    
