@@ -51,12 +51,12 @@ public class search implements ActionListener {
         min_tot = new JTextField();
         max_tot = new JTextField();
 
-        label1 = new JLabel("Enter the minmum of date range or leave empty");
-        label2 = new JLabel("Enter the maximun of date range or leave empty");
-        label3 = new JLabel("Enter the minimum of average damages or leave empty");
-        label4 = new JLabel("Enter the maximun of average damages or leave empty");
-        label5 = new JLabel("Enter the minimum of total damages or leave empty");
-        label6 = new JLabel("Enter the maximun of total damages or leave empty");
+        label1 = new JLabel("Enter the min date range or leave empty");
+        label2 = new JLabel("Enter the max date range or leave empty");
+        label3 = new JLabel("Enter the min average damages or leave empty");
+        label4 = new JLabel("Enter the max average damages or leave empty");
+        label5 = new JLabel("Enter the min total damages or leave empty");
+        label6 = new JLabel("Enter the max total damages or leave empty");
 
         frame.add(min_date);
         frame.add(label1);
@@ -91,16 +91,7 @@ public class search implements ActionListener {
             String f = min_tot.getText();
             String g = max_tot.getText();
 
-            System.out.println(a);
-            System.out.println(b);
-            System.out.println(c);
-            System.out.println(d);
-            System.out.println(f);
-            System.out.println(g);
-
-
-
-
+           
             // NumberFormat nf = NumberFormat.getCurrencyInstance();
 		    Connection connection = null;
 		    String query = null;
@@ -124,8 +115,6 @@ public class search implements ActionListener {
 
 
                 if(min_avg.getText().isEmpty() && min_date.getText().isEmpty() && min_tot.getText().isBlank()){
-                    System.out.println("Not entered 1");
-
                      dmin = "0000-01-01";
                      dmax = "9999-12-31";
                      amin = 0;
@@ -134,9 +123,35 @@ public class search implements ActionListener {
                      tmax = 999999;
                 }
 
-                else if(min_date.getText().isEmpty() && min_avg.getText().isEmpty()){
-                    System.out.println("Not entered 2");
+                else if(min_date.getText().isEmpty() && min_avg.getText().isEmpty()==false && min_tot.getText().isEmpty()==false){
+                    dmin = "0000-01-01";
+                    dmax = "9999-12-31";
+                    amin = Integer.parseInt(c);
+                    amax = Integer.parseInt(d);
+                    tmin = Integer.parseInt(f);
+                    tmax = Integer.parseInt(g);
+                }
 
+                else if(min_date.getText().isEmpty()==false && min_avg.getText().isEmpty() && min_tot.getText().isEmpty()==false){
+                    dmin = "0000-01-01";
+                    dmax = "9999-12-31";
+                    amin = 0;
+                    amax = 999999;
+                    tmin = Integer.parseInt(f);
+                    tmax = Integer.parseInt(g);
+                }
+
+                else if(min_date.getText().isEmpty()==false && min_avg.getText().isEmpty()==false && min_tot.getText().isEmpty()) {
+                    dmin = a;
+                    dmax = b;
+                    amin = Integer.parseInt(c);
+                    amax = Integer.parseInt(d);
+                    tmin = 0;
+                    tmax = 999999;
+
+                }
+
+                else if(min_date.getText().isEmpty() && min_avg.getText().isEmpty()){
                     dmin = "0000-01-01";
                     dmax = "9999-12-31";
                     amin = 0;
@@ -147,8 +162,6 @@ public class search implements ActionListener {
                 }
 
                 else if(min_avg.getText().isEmpty() && min_tot.getText().isEmpty()){
-                    System.out.println("Not entered 3");
-
                     dmin = a;
                     dmax = b;
                     amin = 0;
@@ -157,7 +170,6 @@ public class search implements ActionListener {
                     tmax = 999999;
                 }
                 else if(min_date.getText().isEmpty()  && min_tot.getText().isEmpty()){
-                    System.out.println("Not entered 4");
                     dmin = "0000-01-01";
                     dmax = "9999-12-31";
                     amin = Integer.parseInt(c);
@@ -167,7 +179,6 @@ public class search implements ActionListener {
                 }
 
                 else{
-                    System.out.println("Not entered 5");
                     System.out.println(a);
                     System.out.println(b);
                     System.out.println(c);
@@ -182,10 +193,6 @@ public class search implements ActionListener {
                     tmin = Integer.parseInt(f);
                     tmax = Integer.parseInt(g);
                 }
-                //  amin = Integer.parseInt(c);
-                //  amax = Integer.parseInt(d);
-                //  tmin = Integer.parseInt(f);
-                //  tmax = Integer.parseInt(g);
 
                 query = "select * from (select * from accidents where aid in(select aid from (select aid,SUM(damages) as tdamages, AVG(damages) as adamages from involvements GROUP BY aid) where tdamages > "+tmin+" AND tdamages < "+tmax+" and adamages > "+amin+" and adamages < "+amax+")) where accident_date > '"+dmin+"' and accident_date < '"+dmax+"' ";
 
@@ -195,7 +202,6 @@ public class search implements ActionListener {
 				String date = result.getString(2);
 				String city = result.getString(3);
 				String state = result.getString(4);
-				// int dam2 = result.getInt(3);
 
                 JTextArea t = new JTextArea("Accident id is: " + ac_id +
                 "\r\n" + "Date is :  " + date +
@@ -204,15 +210,7 @@ public class search implements ActionListener {
                 "\r\n\r\n");
 
                 frame.add(new JScrollPane(t));
-                // frame.setLayout(new GridLayout(20,2));
-                // frame.setVisible(true);
                 frame.pack();
-				// System.out.println("Accident id is: " + ac_id);
-				// System.out.println("Date is :  " + date);
-				// System.out.println("City is : " + city);
-				// System.out.println("State is : " + state);
-
-				System.out.println("");
 			}
 			result.close();
 
@@ -221,6 +219,18 @@ public class search implements ActionListener {
 
             }catch (Exception e) {
                 System.out.println(query);
+                JFrame frame2 = new JFrame();
+                    frame2.setForeground(Color.WHITE);
+                    frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame2.setLocation(new Point(550, 200));
+                    frame2.setSize(new Dimension(600, 400));
+                    frame2.setTitle("An search frame");
+
+                    JLabel lab1 = new JLabel();
+                    lab1.setText("Invalid entry! Please enter correct value");
+
+                    frame2.add(lab1);
+                    frame2.setVisible(true);
                 e.printStackTrace();
             } 
             finally {

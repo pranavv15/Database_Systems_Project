@@ -98,6 +98,18 @@ public class details implements ActionListener {
                 
                 }catch (Exception e) {
                     System.out.println(query);
+                    JFrame frame2 = new JFrame();
+                    frame2.setForeground(Color.WHITE);
+                    frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame2.setLocation(new Point(550, 200));
+                    frame2.setSize(new Dimension(600, 400));
+                    frame2.setTitle("An details frame");
+
+                    JLabel lab1 = new JLabel();
+                    lab1.setText("Invalid entry! Please enter correct value");
+
+                    frame2.add(lab1);
+                    frame2.setVisible(true);
                     e.printStackTrace();
                 } 
                 finally {
