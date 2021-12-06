@@ -3,6 +3,7 @@ import javax.swing.*; // for GUI components
 import java.awt.event.*; // for action events
 import details.details;
 import insert.insert;
+import search.search;
 import java.sql.*;
 import java.text.NumberFormat;
 import java.util.Scanner;
@@ -70,6 +71,9 @@ public class Frame {
                 
                 else if (event.getSource()== button1){
                         insert ins = new insert();
+                }
+                else if(event.getSource()==button3){
+                    search ser = new search();
                 }
                     }
             }

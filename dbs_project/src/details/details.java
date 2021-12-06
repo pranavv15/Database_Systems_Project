@@ -50,7 +50,7 @@ public class details implements ActionListener {
         if (event.getSource()==button){
             String t = text.getText();
 
-
+            System.out.print(t);
             // NumberFormat nf = NumberFormat.getCurrencyInstance();
 		    Connection connection = null;
 		    String query = null;
@@ -69,7 +69,6 @@ public class details implements ActionListener {
 			    int a_id = Integer.parseInt(t);
                 query = "select involvements.aid,vin,damages,driver_ssn,accident_date,city,state from involvements, accidents where accidents.aid = "+a_id+" and involvements.aid = "+a_id+"";
                 ResultSet rslt = stmnt.executeQuery(query);
-                int val = 0;
                 while (rslt.next()) {
                     int accid = rslt.getInt(1);
                     String v = rslt.getString(2);
@@ -88,7 +87,6 @@ public class details implements ActionListener {
                     "\r\n" + "State: " + State +
                     "\r\n\r\n");
 
-                    val=val+1;
                     frame.add(k);
                     frame.setLayout(new GridLayout(6,1));
                     frame.pack();

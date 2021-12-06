@@ -184,10 +184,11 @@ public class insert implements ActionListener {
                     frame2.setTitle("An insert frame");
 
                     JLabel lab1 = new JLabel();
-                    lab1.setText("Invalid entery! Please enter correct value");
+                    lab1.setText("Invalid entry! Please enter correct value");
 
                     frame2.add(lab1);
                     frame2.setVisible(true);
+                    // frame2.pack();
 
                     e.printStackTrace();
                 } 
